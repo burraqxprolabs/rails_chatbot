@@ -1,0 +1,16 @@
+RailsChatbot Installation Complete!
+
+Next steps:
+
+1. Set your OpenAI API key:
+   export OPENAI_API_KEY=your_api_key_here
+
+2. Run migrations:
+   rails db:migrate
+
+3. Index your models:
+   rake rails_chatbot:index_all
+
+4. Visit /chatbot in your application to start using the chatbot!
+
+For more information, see the README.md file.

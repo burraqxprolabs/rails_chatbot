@@ -36,20 +36,46 @@ namespace :rails_chatbot do
   task index_all: :environment do
     puts "Indexing all ActiveRecord models..."
     
-    Rails.application.eager_load!
-    models = ActiveRecord::Base.descendants.reject(&:abstract_class?)
-    
-    models.each do |model|
-      begin
-        puts "Indexing #{model.name}..."
-        RailsChatbot::KnowledgeBase.index_model(model)
-        puts "✓ Indexed #{model.name}"
-      rescue => e
-        puts "✗ Error indexing #{model.name}: #{e.message}"
-      end
-    end
+    RailsChatbot::KnowledgeIndexer.index_all_models
     
     puts "\nDone!"
+  end
+
+  desc "Add custom knowledge to the base"
+  task :add_knowledge, [:title, :content, :source_type] => :environment do |_t, args|
+    title = args[:title]
+    content = args[:content]
+    source_type = args[:source_type] || 'custom'
+    
+    if title.blank? || content.blank?
+      puts "Usage: rake rails_chatbot:add_knowledge['Title','Content','SourceType']"
+      puts "Example: rake rails_chatbot:add_knowledge['API Documentation','Use the API endpoint...','docs']"
+      exit
+    end
+
+    begin
+      RailsChatbot::KnowledgeIndexer.add_custom_knowledge(
+        title: title,
+        content: content,
+        source_type: source_type
+      )
+      puts "✓ Added knowledge entry: #{title}"
+    rescue => e
+      puts "✗ Error adding knowledge: #{e.message}"
+    end
+  end
+
+  desc "Show knowledge base statistics"
+  task stats: :environment do
+    total = RailsChatbot::KnowledgeBase.count
+    by_source = RailsChatbot::KnowledgeBase.group(:source_type).count
+    
+    puts "Knowledge Base Statistics:"
+    puts "Total entries: #{total}"
+    puts "By source type:"
+    by_source.each do |source_type, count|
+      puts "  #{source_type}: #{count}"
+    end
   end
 end
 

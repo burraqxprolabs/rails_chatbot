@@ -1,5 +1,7 @@
 require "rails_chatbot/version"
 require "rails_chatbot/engine"
+require "rails_chatbot/railtie"
+require "rails_chatbot/knowledge_indexer"
 
 module RailsChatbot
   class << self
@@ -13,7 +15,7 @@ module RailsChatbot
   end
 
   class Configuration
-    attr_accessor :openai_api_key, :openai_model, :chatbot_title, :current_user_proc, :enable_knowledge_base_indexing
+    attr_accessor :openai_api_key, :openai_model, :chatbot_title, :current_user_proc, :enable_knowledge_base_indexing, :indexable_models
 
     def initialize
       @openai_api_key = ENV['OPENAI_API_KEY']
@@ -21,6 +23,7 @@ module RailsChatbot
       @chatbot_title = 'Application Assistant'
       @enable_knowledge_base_indexing = true
       @current_user_proc = nil
+      @indexable_models = nil # Array of model classes to index
     end
   end
 end

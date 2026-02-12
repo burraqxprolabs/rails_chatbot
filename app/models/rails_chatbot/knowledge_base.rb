@@ -37,13 +37,19 @@ module RailsChatbot
         content_parts = fields.map { |field| record.send(field) if record.respond_to?(field) }.compact
         content_text = content_parts.join("\n\n")
 
+        source_url = begin
+          Rails.application.routes.url_helpers.polymorphic_path(record)
+        rescue
+          nil
+        end
+
         find_or_initialize_by(
           source_type: model_class.name,
           source_id: record.id.to_s
         ).update!(
           title: record.try(:name) || record.try(:title) || "#{model_class.name} ##{record.id}",
           content: content_text,
-          source_url: Rails.application.routes.url_helpers.polymorphic_path(record) rescue nil
+          source_url: source_url
         )
       end
     end

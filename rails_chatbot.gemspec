@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 8.0.4"
-  spec.add_dependency "ruby-openai", "~> 7.0"
+  spec.add_dependency "ruby-openai", ">= 7", "< 9"
   spec.add_development_dependency "pg_search", "~> 2.3"
 end

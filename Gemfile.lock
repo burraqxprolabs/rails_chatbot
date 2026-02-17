@@ -3,7 +3,7 @@ PATH
   specs:
     rails_chatbot (0.2.0)
       rails (>= 8.0.4)
-      ruby-openai (~> 7.0)
+      ruby-openai (>= 7, < 9)
 
 GEM
   remote: https://rubygems.org/
@@ -94,7 +94,7 @@ GEM
     erb (6.0.1)
     erubi (1.13.1)
     event_stream_parser (1.0.0)
-    faraday (2.14.0)
+    faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -111,7 +111,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.18.0)
+    json (2.18.1)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -253,7 +253,7 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
-    ruby-openai (7.4.0)
+    ruby-openai (8.3.0)
       event_stream_parser (>= 0.3.0, < 2.0.0)
       faraday (>= 1)
       faraday-multipart (>= 1)

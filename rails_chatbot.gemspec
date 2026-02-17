@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version     = RailsChatbot::VERSION
   spec.authors     = ["Burraq Ur Rehman"]
   spec.email       = ["burraq@xprolabs.com"]
-  spec.homepage    = "https://github.com/yourusername/rails_chatbot"
+  spec.homepage    = "https://github.com/burraqxprolabs/rails_chatbot"
   spec.summary     = "AI-powered chatbot system with knowledge base integration for Rails applications"
   spec.description = "RailsChatbot is a Rails engine that provides an intelligent chatbot system with knowledge base integration. It can answer questions about your application by indexing your models and content, using OpenAI's GPT models for intelligent responses."
   spec.license     = "MIT"

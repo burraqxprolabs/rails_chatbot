@@ -127,12 +127,12 @@
   </style>
 <% end %>
 
-<div class="chatbot-container" data-controller="chatbot">
+<div class="chatbot-container">
   <div class="chatbot-header">
     <%= RailsChatbot.configuration.chatbot_title %>
   </div>
   
-  <div class="chatbot-messages" data-chatbot-target="messages">
+  <div class="chatbot-messages" id="chatbot-messages">
     <div class="message assistant">
       <div class="message-bubble">
         Hello! I'm your application assistant. How can I help you today?
@@ -144,14 +144,12 @@
     <input 
       type="text" 
       class="chatbot-input" 
+      id="chatbot-input"
       placeholder="Type your message..."
-      data-chatbot-target="input"
-      data-action="keydown->chatbot#handleKeyDown"
     >
     <button 
       class="chatbot-send" 
-      data-action="click->chatbot#sendMessage"
-      data-chatbot-target="sendButton"
+      id="chatbot-send"
     >
       Send
     </button>
@@ -160,6 +158,6 @@
 
 <script>
   window.RailsChatbot = window.RailsChatbot || {};
-  window.RailsChatbot.routes = <%= rails_chatbot_routes %>;
+  window.RailsChatbot.routes = <%= @rails_chatbot_routes %>;
 </script>
 <%= javascript_include_tag "rails_chatbot/application" %>

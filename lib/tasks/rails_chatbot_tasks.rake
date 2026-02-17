@@ -25,6 +25,35 @@ namespace :rails_chatbot do
     puts "\nDone!"
   end
 
+  desc "Index application content for knowledge base"
+  task index_application_content: :environment do
+    puts "Indexing application content..."
+    RailsChatbot::ApplicationContentService.index_application_content
+    puts "Application content indexed successfully!"
+  end
+
+  desc "Add default knowledge entries"
+  task add_default_knowledge: :environment do
+    puts "Adding default knowledge entries..."
+    
+    RailsChatbot::KnowledgeIndexer.add_custom_knowledge(
+      title: "Services",
+      content: RailsChatbot.configuration.default_responses[:services],
+      source_type: "default",
+      source_url: "/services"
+    )
+    
+    puts "Default knowledge entries added!"
+  end
+
+  desc "Setup chatbot (index content + add defaults)"
+  task setup: :environment do
+    puts "Setting up RailsChatbot..."
+    Rake::Task['rails_chatbot:index_application_content'].invoke
+    Rake::Task['rails_chatbot:add_default_knowledge'].invoke
+    puts "RailsChatbot setup complete!"
+  end
+
   desc "Clear knowledge base"
   task clear_knowledge_base: :environment do
     count = RailsChatbot::KnowledgeBase.count

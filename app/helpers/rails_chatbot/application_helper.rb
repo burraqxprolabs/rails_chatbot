@@ -8,5 +8,13 @@ module RailsChatbot
       }
       routes.to_json.html_safe
     end
+
+    def include_chatbot_widget
+      render 'rails_chatbot/shared/chat_widget'
+    end
+
+    def chatbot_widget_enabled?
+      RailsChatbot.configuration.enable_widget != false
+    end
   end
 end

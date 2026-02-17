@@ -1,0 +1,56 @@
+<!-- Floating Chatbot Widget -->
+<div class="chatbot-widget">
+  <!-- Chat Icon -->
+  <div class="chatbot-icon" id="chatbot-toggle">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 10h.01M12 10h.01M16 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="chatbot-badge" id="unread-badge" style="display: none;">1</span>
+  </div>
+
+  <!-- Chat Window -->
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <%= RailsChatbot.configuration.chatbot_title %>
+      </div>
+      <button class="chatbot-close" id="chatbot-close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="message assistant">
+        <div class="message-bubble">
+          Hello! I'm your application assistant. How can I help you today?
+        </div>
+      </div>
+    </div>
+    
+    <div class="chatbot-input-container">
+      <input 
+        type="text" 
+        class="chatbot-input" 
+        id="chatbot-input"
+        placeholder="Type your message..."
+      >
+      <button 
+        class="chatbot-send" 
+        id="chatbot-send"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.RailsChatbot = window.RailsChatbot || {};
+  window.RailsChatbot.routes = <%= rails_chatbot_routes %>;
+</script>
+<%= javascript_include_tag "rails_chatbot/widget" %>

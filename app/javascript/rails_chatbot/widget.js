@@ -1,13 +1,35 @@
-// Chatbot controller using vanilla JavaScript
+// Chatbot Widget JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-  const chatbotContainer = document.querySelector('.chatbot-container');
-  if (!chatbotContainer) return;
-
+  const chatbotIcon = document.getElementById('chatbot-toggle');
+  const chatbotWindow = document.getElementById('chatbot-window');
+  const chatbotClose = document.getElementById('chatbot-close');
   const messagesContainer = document.getElementById('chatbot-messages');
   const input = document.getElementById('chatbot-input');
   const sendButton = document.getElementById('chatbot-send');
+  const unreadBadge = document.getElementById('unread-badge');
+  
   let conversationId = null;
   let isLoading = false;
+  let isWindowOpen = false;
+
+  // Toggle chat window
+  function toggleChatWindow() {
+    isWindowOpen = !isWindowOpen;
+    
+    if (isWindowOpen) {
+      chatbotWindow.classList.add('open');
+      unreadBadge.style.display = 'none';
+      input.focus();
+    } else {
+      chatbotWindow.classList.remove('open');
+    }
+  }
+
+  // Close chat window
+  function closeChatWindow() {
+    isWindowOpen = false;
+    chatbotWindow.classList.remove('open');
+  }
 
   // Initialize conversation
   function initializeConversation() {
@@ -74,6 +96,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loading) loading.remove();
   }
 
+  // Show unread indicator
+  function showUnreadIndicator() {
+    if (!isWindowOpen) {
+      unreadBadge.style.display = 'flex';
+    }
+  }
+
   // Send message
   function sendMessage() {
     const message = input.value.trim();
@@ -111,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
           conversationId = data.conversation_id;
         }
         addMessage('assistant', data.message.content, data.knowledge_sources || []);
+        showUnreadIndicator();
       }
     })
     .catch(error => {
@@ -134,11 +164,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Attach event listeners
-  sendButton.addEventListener('click', sendMessage);
-  input.addEventListener('keydown', handleKeyDown);
+  if (chatbotIcon) chatbotIcon.addEventListener('click', toggleChatWindow);
+  if (chatbotClose) chatbotClose.addEventListener('click', closeChatWindow);
+  if (sendButton) sendButton.addEventListener('click', sendMessage);
+  if (input) input.addEventListener('keydown', handleKeyDown);
 
   // Initialize conversation on load
   initializeConversation();
+
+  // Show welcome message if no messages
+  const existingMessages = messagesContainer.querySelectorAll('.message');
+  if (existingMessages.length === 0) {
+    addMessage('assistant', 'Hello! I\'m your application assistant. How can I help you today?');
+  }
 });
 
 // Routes helper - populated from server

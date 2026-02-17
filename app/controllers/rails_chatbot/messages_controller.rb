@@ -49,7 +49,7 @@ module RailsChatbot
     end
 
     def session_id
-      @session_id ||= session[:chatbot_session_id] ||= SecureRandom.uuid
+      session[:chatbot_session_id] ||= SecureRandom.uuid
     end
   end
 end

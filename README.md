@@ -55,13 +55,30 @@ Rails.application.routes.draw do
 end
 ```
 
-### Step 5: Start Your Server
+### Step 5: Enable the Widget (Optional)
+
+To enable the floating chatbot widget, add this to your application layout:
+
+```erb
+<%# In app/views/layouts/application.html.erb %>
+<%= RailsChatbot::ApplicationHelper.new.include_chatbot_widget if RailsChatbot::ApplicationHelper.new.chatbot_widget_enabled? %>
+```
+
+Or simply add to any view:
+
+```erb
+<%= include_chatbot_widget %>
+```
+
+The widget will automatically appear in the bottom-right corner of your screen.
+
+### Step 6: Start Your Server
 
 ```bash
 rails server
 ```
 
-Visit `http://localhost:3000/chatbot` to see your chatbot!
+Visit `http://localhost:3000/chatbot` to see your chatbot, or look for the floating chat icon in the bottom-right corner of any page!
 
 ## 🧪 Testing Your Chatbot
 
@@ -280,7 +297,7 @@ For comprehensive documentation, visit our [Documentation Site](./docs/README.md
 
 ---
 
-## �📋 Requirements
+## �� Requirements
 
 - Ruby on Rails 8.0.4 or higher
 - PostgreSQL (for full-text search)

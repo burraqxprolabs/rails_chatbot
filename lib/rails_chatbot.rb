@@ -15,7 +15,7 @@ module RailsChatbot
   end
 
   class Configuration
-    attr_accessor :openai_api_key, :openai_model, :chatbot_title, :current_user_proc, :enable_knowledge_base_indexing, :indexable_models
+    attr_accessor :openai_api_key, :openai_model, :chatbot_title, :current_user_proc, :enable_knowledge_base_indexing, :indexable_models, :enable_widget, :default_responses
 
     def initialize
       @openai_api_key = ENV['OPENAI_API_KEY']
@@ -24,6 +24,13 @@ module RailsChatbot
       @enable_knowledge_base_indexing = true
       @current_user_proc = nil
       @indexable_models = nil # Array of model classes to index
+      @enable_widget = true # Enable floating widget
+      @default_responses = {
+        greeting: "Hello! I'm your application assistant. How can I help you today?",
+        services: "We are working on web-based applications using Ruby on Rails.",
+        no_results: "I don't have specific information about that, but I'm here to help with general questions about our services.",
+        error: "Sorry, I encountered an error. Please try again or contact support."
+      }
     end
   end
 end

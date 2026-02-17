@@ -13,5 +13,9 @@
 
 <%= yield %>
 
+<% if chatbot_widget_enabled? %>
+  <%= include_chatbot_widget %>
+<% end %>
+
 </body>
 </html>

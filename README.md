@@ -266,7 +266,21 @@ Add to `app/assets/stylesheets/rails_chatbot/custom.css`:
 
 Extend functionality in `app/javascript/rails_chatbot/custom.js`.
 
-## 📋 Requirements
+## � Documentation
+
+For comprehensive documentation, visit our [Documentation Site](./docs/README.md).
+
+### Quick Links
+- 🚀 [Quick Start Guide](./docs/quick_start.md) - Get up and running in 5 minutes
+- 📖 [API Reference](./docs/api_reference.md) - Complete API documentation
+- 💡 [Examples & Use Cases](./docs/examples.md) - Real-world implementation examples
+- 🧪 [Testing Guide](./docs/testing.md) - How to test your integration
+- 🚀 [Deployment Guide](./docs/deployment.md) - Production deployment instructions
+- 🤝 [Contributing](./docs/CONTRIBUTING.md) - How to contribute to the project
+
+---
+
+## �📋 Requirements
 
 - Ruby on Rails 8.0.4 or higher
 - PostgreSQL (for full-text search)
